@@ -49,11 +49,6 @@ const FitnessSchema = new Schema({
 
 });
 
-// {
-//     toJSON: {
-//         virtuals: true
-//     }
-// }
 
 const Fitness = mongoose.model("Fitness", FitnessSchema);
 

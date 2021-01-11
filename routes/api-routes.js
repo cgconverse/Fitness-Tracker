@@ -15,10 +15,7 @@ router.get("/exercise", (req, res) => {
     console.log("hit styles")
     res.sendFile(path.join(__dirname, "../public/exercise.html"))
 })
-// router.get("/workout", (req, res) => {
-//     console.log("hit styles")
-//     res.sendFile(path.join(__dirname, "../public/stats.html"))
-// })
+
 router.get("/api/workouts", (req, res) => {
     Workout.find({})
         .then(workouts => {
@@ -42,18 +39,21 @@ router.get("/stats", (req, res) => {
 })
 
 router.get("/api/workouts/range", (req, res) => {
-    // aggregating code https://masteringjs.io/tutorials/mongoose/aggregate
-    Workout.aggregate([
+
+    /* Here we use the aggregate function to dynamically add up and return the total
+        duration for each workout */
+        Workout.aggregate([
         {
-// aggregating the fields based off of total duration which is equal to the sum of the exercise duration
             $addFields: {
                 totalDuration: { $sum: "$exercises.duration" }
             }
         }
     ])
-    // sorting the workout results by id and then only returning 7 results (7 days)
+    // sorting the workout results by id 
         .sort({ _id: 1 })
+    // limiting the results to 7 
         .limit(7)
+    // returning the results
         .then(results => {
             res.json(results)
         })
@@ -64,6 +64,7 @@ router.get("/api/workouts/range", (req, res) => {
 
 
 router.put( "/api/workouts/:id", ({body, params}, res) => {
+    // finding by id and updating
     Workout.findByIdAndUpdate(params.id, {exercises: body}, function(err, result) {
         if(err) {
             res.send(err)
