@@ -16,7 +16,12 @@ When I click on 'Dashboard' I am redirected to the 'stats' page which displays d
 
 On the 'stats' page I can view the combined weight of multiple exercises as well as the total duration of each workout.
 
+## Links
+
+Deployed Application: https://fitness-tracker1717.herokuapp.com/
+GitHub Repository:    https://cgconverse.github.io/Fitness-Tracker/
+
 ## Collaborators
 
-Candy Garcia
+Candy Garcia, 
 Javier Caro
